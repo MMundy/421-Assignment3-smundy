@@ -1,0 +1,114 @@
+﻿@model _421_Assignment3_smundy.Models.ActorTweetSentimentVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Actor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Actor.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Actor.Gender)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Actor.Age)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.IMDBLink)
+        </dt>
+        <dd class = "col-sm-10">
+            @*@Html.DisplayFor(model => model.Actor.IMDBLink)*@
+            <a href="@Model.Actor.IMDBLink">IMDB Page</a>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Photo)
+        </dt>
+        <dd class="col-sm-10">
+            <img width="auto" height="200" src="@Url.Action("GetActorPhoto", "Actors", new {Model.Actor.Id})" />
+        </dd>
+        
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Actor.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<br />
+<h4>Movies</h4>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Movie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies[0].Movie.Poster)
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movies)
+        {
+            <tr>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Movie.Title)*@
+                    <a href="@Url.Action("Details", "Movies", new {item.Movie.Id})">@item.Movie.Title</a>
+                </td>
+                
+                <td>
+                    @if (item.Movie.Poster != null)
+                    {
+                        <img width="auto" height="100" src="@Url.Action("GetMoviePoster", "Movies", new {item.Movie.Id})" />
+                    }
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Tweets</h4>
+<h5> Overall Sentiment Score: @String.Format("{0:0.0000}", Model.OverallSentimentScore)</h5>
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TweetSentiments[0].Tweet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TweetSentiments[0].SentimentScore)
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TweetSentiments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tweet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SentimentScore)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
