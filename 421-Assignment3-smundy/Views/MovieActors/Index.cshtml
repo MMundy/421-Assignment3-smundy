@@ -36,7 +36,7 @@
             </td>
                 <td>
                     @*@Html.DisplayFor(modelItem => item.Movie.Poster)*@
-                    <img width="auto" height="100" src="@Url.Action("GetMoviePoster", "Movies", new {item.Movie.Id})" />
+                    <img width="auto" height="150" src="@Url.Action("GetMoviePoster", "Movies", new {item.Movie.Id})" />
                 </td>
             <td>
                 @*@Html.DisplayFor(modelItem => item.Actor.Name)*@
@@ -44,7 +44,7 @@
             </td>
                 <td>
                     @*@Html.DisplayFor(modelItem => item.Actor.Photo)*@
-                    <img width="auto" height="100" src="@Url.Action("GetActorPhoto", "Actors", new {item.Actor.Id})" />
+                    <img width="auto" height="150" src="@Url.Action("GetActorPhoto", "Actors", new {item.Actor.Id})" />
 
                 </td>
 
